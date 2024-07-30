@@ -1,0 +1,58 @@
+1.aws configure
+access key:***************
+secret key:******************
+creating a bucket :
+aws s3 mb s3://<bucket-name> --region <region name>	
+
+2. Configure Object Ownership
+aws s3api put-bucket-ownership-controls --bucket iship-project-1  --ownership-controls Rules=[{ObjectOwnership=BucketOwnerPreferred}]
+
+
+3. Enable Bucket Versioning
+aws s3api put-bucket-versioning --bucket iship-project-1 --versioning-configuration Status=Enabled
+
+
+4. Enable Static Website Hosting
+Create a file named website-configuration.json with the following content:
+
+   {
+  "IndexDocument": {
+    "Suffix": "index.html"
+  },
+  "ErrorDocument": {
+    "Key": "error.html"
+  }
+}
+
+aws s3api put-bucket-website --bucket iship-project-1 --website-configuration file://bucket-iship.json
+
+
+
+5. Command to Turn Off Block All Public Access
+
+aws s3api put-public-access-block \
+    --bucket iship-project-1 \
+    --public-access-block-configuration \
+    '{
+      "BlockPublicAcls": false,
+      "IgnorePublicAcls": false,
+      "BlockPublicPolicy": false,
+      "RestrictPublicBuckets": false
+    }'
+
+
+
+6. Grant Public Read Access to the Bucket : Set Bucket ACL to Public Read
+aws s3api put-bucket-acl --bucket iship-project-1 --acl public-read
+
+
+7. To upload files
+aws s3 cp index.html s3://iship-project-1
+8.To upload floders 
+aws s3 cp css s3://iship-project-1/css --recursive
+aws s3 cp images s3://iship-project-1/images --recursive
+aws s3 cp fonts s3://iship-project-1/fonts --recursive
+aws s3 cp js s3://iship-project-1/js --recursive
+
+9.end point link:
+http://iship-project-1.s3-website-us-east-1.amazonaws.com/
