@@ -55,4 +55,5 @@ aws s3 cp fonts s3://iship-project-1/fonts --recursive
 aws s3 cp js s3://iship-project-1/js --recursive
 
 9.end point link:
+The link that is generated when creating the s3 bucket .The link as follows
 http://iship-project-1.s3-website-us-east-1.amazonaws.com/
